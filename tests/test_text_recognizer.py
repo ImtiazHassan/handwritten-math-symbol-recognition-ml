@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.text_recognizer import predict, predict_character, predict_text
+from support.text_recognizer import predict, predict_character, predict_text
 
 
 SAMPLES = {
