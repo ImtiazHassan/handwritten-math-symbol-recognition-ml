@@ -1,0 +1,25 @@
+# Python 3.12 (whole team uses the same version)
+# Install: pip install -r requirements.txt
+# Minimum versions for now; pin exact versions later with `pip freeze`.
+
+# Core (everyone)
+numpy>=1.26
+pandas>=2.1
+pillow>=10.0
+matplotlib>=3.8
+
+# Image preprocessing (Imtiaz)
+opencv-python>=4.8
+
+# Baselines and evaluation metrics
+scikit-learn>=1.3
+
+# Models: EMNIST loading and CNNs (Ahnaf, Sonali)
+torch>=2.2
+torchvision>=0.17
+
+# Web app (Muntaha)
+streamlit>=1.30
+
+# Tests
+pytest>=7.4
