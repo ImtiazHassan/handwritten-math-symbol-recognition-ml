@@ -1,0 +1,1 @@
+"""Mathematical symbol recognition components."""
