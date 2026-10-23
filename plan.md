@@ -71,7 +71,7 @@ Rules:
 Image upload (main.py, Streamlit)
         │
         ▼
-preprocess_image(image)            ← support/preprocessing.py   (Imtiaz)
+preprocess_image(image, size)      ← support/preprocessing.py   (Imtiaz)
         │
         ▼
 run_pipeline(image, mode)          ← support/pipeline.py        (Imtiaz)
@@ -89,7 +89,7 @@ Result shown in the app: prediction · confidence · correction field
 
 | Function | File | Input | Output |
 |---|---|---|---|
-| `preprocess_image(image)` | `support/preprocessing.py` | raw image | processed image |
+| `preprocess_image(image, size)` | `support/preprocessing.py` | raw image, target size | NumPy float32 `(size, size)`, 0–1, white ink on black |
 | `recognize_text(image)` | `support/text_recognizer.py` | processed image | `{"text": str, "confidence": float}` |
 | `recognize_math(image)` | `support/math_recognizer.py` | processed image | `{"label": str, "confidence": float}` |
 | `run_pipeline(image, mode)` | `support/pipeline.py` | raw image, `"text"` or `"math"` | the recognizer's dictionary; `ValueError` for an unknown mode |
@@ -100,13 +100,15 @@ Until the real models are ready, each function returns **placeholder (mock)
 predictions** so others can build against it. Placeholder values are never
 reported as results.
 
-### Image format — TO DECIDE (owner: Imtiaz, before Update 1)
+### Image format — DECIDED (Oct 23, owner: Imtiaz)
 
-- [ ] Functions pass a **PIL image** or a **NumPy array**?
-- [ ] Grayscale only? Pixel values **0–255** or **0–1**?
-- [ ] Ink colour convention (white ink on black, or black on white) — must match each dataset.
-- [ ] Who resizes? EMNIST images are **28×28**; CROHME render size is chosen by Sonali.
-      Either `preprocess_image` takes a size, or each recognizer resizes itself.
+Full details and reasons: [docs/architecture.md](docs/architecture.md).
+
+- [x] Modules pass a **NumPy array**, shape `(size, size)`, `float32`.
+- [x] Grayscale, pixel values **0–1**.
+- [x] **White ink (1.0) on black background (0.0)** for both models.
+- [x] `preprocess_image(image, size)` resizes; each recognizer declares its own `INPUT_SIZE`
+      (EMNIST: 28). Only processed arrays reach the models.
 
 ---
 
