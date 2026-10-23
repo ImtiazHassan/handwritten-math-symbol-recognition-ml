@@ -11,3 +11,4 @@ models/*
 !models/README.md
 docs/screenshots/*
 !docs/screenshots/.gitkeep
+try_*.py
