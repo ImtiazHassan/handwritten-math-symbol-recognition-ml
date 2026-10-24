@@ -20,6 +20,12 @@ def load_grayscale(image):
     return array
 
 
+def to_ink_mask(array, threshold=128):
+    #Return a true/false mask where true means ink (pixels which are darker than threshold)
+    mask = array < threshold
+    return mask
+
+
 def preprocess_image(image):
     """Prepare an input image for recognition.
 
